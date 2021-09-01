@@ -1,0 +1,16 @@
+FROM ubuntu:20.04
+
+ENV TZ Asia/Tokyo
+ENV LANG ja_JP.UTF-8
+ENV NO_AT_BRIDGE 1
+
+RUN apt-get update && \
+    apt-get -y install --no-install-recommends tzdata
+RUN apt-get -y install --no-install-recommends \
+    libgtkmm-3.0-dev \
+    libcanberra-gtk-module \
+    libcanberra-gtk3-module \
+    g++ \
+    make \
+    language-pack-ja \
+    git
