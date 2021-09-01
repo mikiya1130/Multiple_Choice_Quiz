@@ -1,0 +1,21 @@
+@startuml state_diagram
+
+state Quiz {
+    state "出題" as start <<entryPoint>>
+    state "タイトルへ戻る" as end <<exitPoint>>
+
+    start --> Question
+
+    Question -right-> Explanation : 解答
+    Explanation -left-> Question : 次の問題
+
+    Question --> end
+    Explanation --> end
+}
+
+[*] -> Home : 起動
+Home -> [*] : 終了
+Home -down-> start : 問題セットを選択
+end -up-> Home
+
+@enduml

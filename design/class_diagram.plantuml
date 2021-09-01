@@ -1,0 +1,70 @@
+@startuml class_diagram
+
+package "Window" {
+    class AppWindow {
+        - appStack: Gtk::Stack
+        - homeWindow: Gtk::Window
+        - quizWindow: Gtk::Window
+    }
+
+    class HomeWindow {
+        - header_box: Gtk::Box
+        - virtual_paned: Gtk::Paned
+        - quiz_set_button_list: Gtk::Button[]
+        - option_button_list Gtk::CheckButton[]
+
+        - onQuizSetButtonClicked(number: int): void
+        - onOptionButtonClicked(number: int): void
+    }
+
+    class QuizWindow {
+        - header_box: Gtk::Box
+        - question_number_label: Gtk::Label
+        - statistics_label: Gtk::Label
+        - virtual_paned: Gtk::Paned
+        - qa_notebook: Gtk::Notebook
+        - question_label: Gtk::Label
+        - explanation_label: Gtk::Label
+        - previous_button: Gtk::Button
+        - home_button: Gtk::Button
+        - next_button: Gtk::Button
+        - choice_button_list: Gtk::Button[]
+
+        - onQaNotebookSwitchPage(page: Gtk::Widget*, guint page_num: guint): void
+        - onPreviousButtonClicked(): void
+        - onHomeButtonClicked(): void
+        - onNextButtonClicked(): void
+        - onChoiceButtonClicked(number: int): void
+    }
+
+    AppWindow -- HomeWindow
+    AppWindow -- QuizWindow
+}
+
+package "Quiz" {
+    class QuizSet {
+        - filepath: Glib::ustring
+        - name: Glib::ustring
+        - quiz_list: Quiz[]
+        - correct_sum: int
+        - question_sum: int
+
+        + QuizSet(filepath: Glib::ustring)
+        + getName(): Glib::ustring
+        + loadQuiz(random_question: bool, random_choice: bool): void
+        + getQuiz(number: int): Quiz
+        + answerQuiz(number: int, answer: int): void
+    }
+
+    class Quiz {
+        - question: Glib::ustring
+        - choices: Glib::ustring[]
+        - answer: int
+        - correct_answer: int
+        - explanation: Glib::ustring
+    }
+
+    QuizSet "1" *-- "*" Quiz
+}
+
+@enduml
