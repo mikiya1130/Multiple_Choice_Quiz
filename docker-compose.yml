@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+    multiple_choice_quiz:
+        build:
+            context: .
+            dockerfile: Dockerfile.ubuntu
+        container_name: Multiple_Choice_Quiz
+        environment:
+            DISPLAY: ':0'
+        volumes:
+            - .:/workspace/Multiple_Choice_Quiz
+            - /tmp/.X11-unix:/tmp/.X11-unix
+        tty: true
+    plantuml-server:
+        image: plantuml/plantuml-server
+        container_name: plantuml-server
+        ports:
+            - 8080:8080

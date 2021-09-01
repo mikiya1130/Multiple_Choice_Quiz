@@ -1,20 +1,15 @@
 {
     "name": "Multiple_Choice_Quiz",
 
-    "build": {
-        "dockerfile": "Dockerfile",
-        "context": "..",
-    },
+	"dockerComposeFile": "../docker-compose.yml",
+
+    "service": "multiple_choice_quiz",
+
+	"workspaceFolder": "/workspace/Multiple_Choice_Quiz",
 
     "extensions": [
         "ms-vscode.cpptools",
         "hediet.vscode-drawio",
-    ],
-
-    "runArgs": [
-        "-e", "DISPLAY=:0"
-    ],
-    "mounts": [
-        "source=/tmp/.X11-unix/,target=/tmp/.X11-unix,type=bind,consistency=cached"
+        "jebbs.plantuml",
     ],
 }

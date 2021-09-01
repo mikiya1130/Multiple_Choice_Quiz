@@ -1,0 +1,4 @@
+{
+    "plantuml.render": "PlantUMLServer",
+    "plantuml.server": "http://plantuml-server:8080"
+}
