@@ -13,4 +13,5 @@ RUN apt-get -y install --no-install-recommends \
     g++ \
     make \
     language-pack-ja \
+    fonts-takao \
     git
