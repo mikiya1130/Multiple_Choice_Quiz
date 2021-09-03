@@ -14,4 +14,6 @@ RUN apt-get -y install --no-install-recommends \
     make \
     language-pack-ja \
     fonts-takao \
-    git
+    git \
+    doxygen \
+    graphviz
