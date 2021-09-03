@@ -1,4 +1,9 @@
 {
     "plantuml.render": "PlantUMLServer",
-    "plantuml.server": "http://plantuml-server:8080"
+    "plantuml.server": "http://plantuml-server:8080",
+    "files.associations": {
+        "*.tcc": "cpp",
+        "filesystem": "cpp"
+    },
+    "C_Cpp.default.cppStandard": "c++17"
 }

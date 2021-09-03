@@ -3,7 +3,7 @@ BUILDDIR := build
 TARGET   := $(BUILDDIR)/Multiple_Choice_Quiz
 
 CXX      := g++
-CXXFLAGS := -Wall -Wextra `pkg-config --cflags gtkmm-3.0`
+CXXFLAGS := -Wall -Wextra `pkg-config --cflags gtkmm-3.0` -std=c++17
 LDFLAGS  := `pkg-config --libs gtkmm-3.0`
 
 SRCS     := $(wildcard $(SRCDIR)/*.cpp)
