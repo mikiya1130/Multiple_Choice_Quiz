@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="0ilDZoGSGt7FoFYHkqKp" name="Page-1">
-        <mxGraphModel dx="767" dy="766" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="547" dy="766" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -61,12 +61,6 @@
                 <mxCell id="27" value="Home" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.containers.window;align=left;verticalAlign=top;spacingLeft=8;strokeColor2=#008cff;strokeColor3=#c4c4c4;fontColor=#666666;mainText=;fontSize=17;labelBackgroundColor=none;" parent="1" vertex="1">
                     <mxGeometry x="40" y="40" width="720" height="440" as="geometry"/>
                 </mxCell>
-                <mxCell id="28" value="" style="verticalLabelPosition=bottom;shadow=0;dashed=0;align=center;html=1;verticalAlign=top;strokeWidth=1;shape=mxgraph.mockup.forms.splitter;strokeColor=#999999;direction=north;" parent="1" vertex="1">
-                    <mxGeometry x="520" y="110" width="10" height="370" as="geometry"/>
-                </mxCell>
-                <mxCell id="29" value="" style="verticalLabelPosition=bottom;shadow=0;dashed=0;align=center;html=1;verticalAlign=top;strokeWidth=1;shape=mxgraph.mockup.markup.line;strokeColor=#999999;" parent="1" vertex="1">
-                    <mxGeometry x="40" y="100" width="720" height="20" as="geometry"/>
-                </mxCell>
                 <mxCell id="30" value="問題セット①" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.buttons.button;strokeColor=#666666;fontColor=#ffffff;mainText=;buttonStyle=round;fontSize=17;fontStyle=1;fillColor=#008cff;whiteSpace=wrap;" parent="1" vertex="1">
                     <mxGeometry x="60" y="130" width="420" height="50" as="geometry"/>
                 </mxCell>
@@ -84,6 +78,9 @@
                 </mxCell>
                 <mxCell id="39" value="選択肢を&lt;br&gt;ランダムに&lt;br&gt;並び替える" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.forms.rrect;rSize=0;fillColor=#eeeeee;strokeColor=#999999;gradientColor=#cccccc;align=left;spacingLeft=4;fontSize=17;fontColor=#666666;labelPosition=right;" parent="37" vertex="1">
                     <mxGeometry x="8" y="80" width="15" height="15" as="geometry"/>
+                </mxCell>
+                <mxCell id="40" value="" style="verticalLabelPosition=bottom;shadow=0;dashed=0;align=center;html=1;verticalAlign=top;strokeWidth=1;shape=mxgraph.mockup.markup.line;strokeColor=#999999;direction=north;" parent="1" vertex="1">
+                    <mxGeometry x="515" y="70" width="20" height="410" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
