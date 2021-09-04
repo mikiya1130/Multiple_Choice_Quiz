@@ -27,23 +27,29 @@ package "Window" {
     }
 
     class QuizBox {
-        ' - header_box: Gtk::Box
-        ' - question_number_label: Gtk::Label
-        ' - statistics_label: Gtk::Label
-        ' - vertical_paned: Gtk::Paned
-        ' - qa_notebook: Gtk::Notebook
-        ' - question_label: Gtk::Label
-        ' - explanation_label: Gtk::Label
-        ' - previous_button: Gtk::Button
-        ' - home_button: Gtk::Button
-        ' - next_button: Gtk::Button
-        ' - choice_button_list: Gtk::Button[]
+        - header_box: Gtk::Box
+        - question_number_label: Gtk::Label
+        - statistics_label: Gtk::Label
+        - vertical_separator: Gtk::Separator
+        - horizontal_paned: Gtk::Paned
+        - qa_notebook: Gtk::Notebook
+        - question_box: Gtk::Box
+        - explanation_box: Gtk::Box
+        - right_side_box: Gtk::Box
+        - controll_box: Gtk::Box
+        - previous_button: Gtk::Button
+        - home_button: Gtk::Button
+        - next_button: Gtk::Button
+        - vertical_right_side_box_separator: Gtk::Separator
+        - choice_label: Gtk::Label
+        - choice_button_box: Gtk::Box
+        - choice_button_vector: std::vector<Gtk::Button>
 
-        ' - onQaNotebookSwitchPage(page: Gtk::Widget*, guint page_num: guint): void
-        ' - onPreviousButtonClicked(): void
-        ' - onHomeButtonClicked(): void
-        ' - onNextButtonClicked(): void
-        ' - onChoiceButtonClicked(number: int): void
+        - onQaNotebookSwitchPage(page: Gtk::Widget*, guint page_num: guint): void
+        - onPreviousButtonClicked(): void
+        - onHomeButtonClicked(): void
+        - onNextButtonClicked(): void
+        - onChoiceButtonClicked(number: int): void
     }
 
     class CheckButtonWithKey<Key: class, Args: class...> {

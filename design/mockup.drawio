@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="0ilDZoGSGt7FoFYHkqKp" name="Page-1">
-        <mxGraphModel dx="547" dy="766" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="589" dy="766" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -27,12 +27,12 @@
                 </mxCell>
                 <mxCell id="12" value="解説" style="strokeColor=inherit;fillColor=inherit;gradientColor=inherit;strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.containers.rrect;rSize=0;fontSize=17;fontColor=#666666;gradientColor=none;" parent="11" vertex="1">
                     <mxGeometry width="60" height="25" relative="1" as="geometry">
-                        <mxPoint x="410" as="offset"/>
+                        <mxPoint x="70" as="offset"/>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="13" value="問題" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.containers.rrect;rSize=0;fontSize=17;fontColor=#ffffff;strokeColor=#008cff;fillColor=#008cff;" parent="11" vertex="1">
                     <mxGeometry width="60" height="25" relative="1" as="geometry">
-                        <mxPoint x="350" as="offset"/>
+                        <mxPoint x="10" as="offset"/>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="15" value="" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.containers.topButton;rSize=5;strokeColor=#008cff;fillColor=#008cff;gradientColor=none;resizeWidth=1;movable=0;deletable=1;" parent="11" vertex="1">
