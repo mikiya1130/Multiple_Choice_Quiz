@@ -1,4 +1,5 @@
 #include "home_box.hpp"
+#include "option_key.hpp"
 
 HomeBox::HomeBox() : quiz_set_button_box(Gtk::ORIENTATION_VERTICAL),
                      option_button_box(Gtk::ORIENTATION_VERTICAL)
@@ -21,42 +22,29 @@ HomeBox::HomeBox() : quiz_set_button_box(Gtk::ORIENTATION_VERTICAL),
         }
     }
 
-    quiz_set_button_box.signal_button_release_event().connect(
-        sigc::mem_fun(*this, &HomeBox::onQuizSetButtonBoxClicked));
-
-    option_button_vector.emplace_back(CheckButtonWithKey::RandomQuestion, "ランダムに出題する");
-    option_button_box.pack_start(option_button_vector.back(), Gtk::PACK_SHRINK, HomeBox::PADDING);
-    option_button_vector.emplace_back(CheckButtonWithKey::RandomChoice, "選択肢をランダムに並び替える");
-    option_button_box.pack_start(option_button_vector.back(), Gtk::PACK_SHRINK, HomeBox::PADDING);
-}
-
-Glib::ustring HomeBox::getFilepath()
-{
-    Glib::ustring filepath = _filepath;
-    _filepath = "/";
-    return filepath;
-}
-
-bool HomeBox::getActive(CheckButtonWithKey::Key key)
-{
-    for (CheckButtonWithKey &option_button : option_button_vector)
+    option_button_map[OptionKey::RandomQuestion] = Gtk::CheckButton("ランダムに出題する");
+    option_button_map[OptionKey::RandomChoice] = Gtk::CheckButton("選択肢をランダムに並び替える");
+    for (auto &[key, option_button] : option_button_map)
     {
-        if (option_button.getKey() == key)
+        option_button_box.pack_start(option_button, Gtk::PACK_SHRINK, HomeBox::PADDING);
+    }
+}
+
+HomeBox::typeSignalQuizSetButtonClicked HomeBox::signalQuizSetButtonClicked()
+{
+    return signal_quiz_set_button_clicked;
+}
+
+void HomeBox::onQuizSetButtonClicked(Glib::ustring filepath)
+{
+    std::vector<OptionKey> selected_key;
+
+    for (auto &[key, option_button] : option_button_map)
+    {
+        if (option_button.get_active())
         {
-            return option_button.get_active();
+            selected_key.push_back(key);
         }
     }
-
-    return false;
-}
-
-bool HomeBox::onQuizSetButtonBoxClicked(GdkEventButton *)
-{
-    return false;
-}
-
-bool HomeBox::onQuizSetButtonClicked(Glib::ustring filepath)
-{
-    _filepath = filepath;
-    return false;
+    signal_quiz_set_button_clicked.emit(filepath, selected_key);
 }

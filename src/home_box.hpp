@@ -5,12 +5,14 @@
 #ifndef HOME_BOX_HPP
 #define HOME_BOX_HPP
 
-#include "check_button_with_key.hpp"
+#include "option_key.hpp"
 
 #include <gtkmm/box.h>
 #include <gtkmm/separator.h>
 #include <gtkmm/button.h>
+#include <gtkmm/checkbutton.h>
 
+#include <sigc++/sigc++.h>
 #include <filesystem>
 
 namespace fs = std::filesystem;
@@ -27,54 +29,34 @@ public:
     HomeBox();
 
     /**
-     * @brief Get the Filepath object
-     *
-     * @return Glib::ustring ファイルパス文字列
+     * @brief QuizSetButtonのクリックシグナルを扱う
      */
-    Glib::ustring getFilepath();
+    typedef sigc::signal<void, Glib::ustring, std::vector<OptionKey>> typeSignalQuizSetButtonClicked;
 
     /**
-     * @brief Get the Active object
+     * @brief signal accessor
      *
-     * @param key キー
-     * @return true キーに対応するCheckBoxにチェックが付いているとき
-     * @return false キーに対応するCheckBoxにチェックが付いていないとき
+     * @return typeSignalQuizSetButtonClicked
      */
-    bool getActive(CheckButtonWithKey::Key key);
+    typeSignalQuizSetButtonClicked signalQuizSetButtonClicked();
 
 private:
-    static const int PADDING = 15;                        /**< ButtonやCheckBox同士の間隔 */
-    static inline const std::string PATH = "./data";      /**< クイズデータを読み込むディレクトリ */
-    static inline const std::string EXT = ".json";        /**< クイズデータの保存形式 */
-    Gtk::Box quiz_set_button_box;                         /**< クイズセットのボタンを子に持つBox */
-    std::vector<Gtk::Button> quiz_set_button_vector;      /**< クイズセットのボタンのvector */
-    Gtk::Separator vertical_separator;                    /**< クイズセットとオプションの領域を左右に分けるセパレーター */
-    Gtk::Box option_button_box;                           /**< オプションのチェックボックスを子に持つBox */
-    std::vector<CheckButtonWithKey> option_button_vector; /**< オプションのチェックボックスのvector */
-    Glib::ustring _filepath = "/";                        /**< 選択されたクイズデータへのファイルパス("/"はダミー) */
+    static const int PADDING = 15;                                 /**< ButtonやCheckBox同士の間隔 */
+    static inline const std::string PATH = "./data";               /**< クイズデータを読み込むディレクトリ */
+    static inline const std::string EXT = ".json";                 /**< クイズデータの保存形式 */
+    Gtk::Box quiz_set_button_box;                                  /**< クイズセットのボタンを子に持つBox */
+    std::vector<Gtk::Button> quiz_set_button_vector;               /**< クイズセットのボタンのvector */
+    Gtk::Separator vertical_separator;                             /**< クイズセットとオプションの領域を左右に分けるセパレーター */
+    Gtk::Box option_button_box;                                    /**< オプションのチェックボックスを子に持つBox */
+    std::map<OptionKey, Gtk::CheckButton> option_button_map;       /**< オプションのチェックボックスのmap */
+    typeSignalQuizSetButtonClicked signal_quiz_set_button_clicked; /**< QuizSetButtonのクリックシグナル */
 
     /**
-     * @brief ButtonClickedの伝搬
+     * @brief QuizSetButtonのクリックシグナルを送る
      *
-     * bool onHomeBoxClicked(GdkEventButton *);
-     * ^
-     * (this)
-     * ^
-     * bool onQuizSetButtonClicked(Glib::ustring filepath);
-     *
-     * @return true Not propagation (not called)
-     * @return false Propagation
+     * @param filepath
      */
-    bool onQuizSetButtonBoxClicked(GdkEventButton *);
-
-    /**
-     * @brief ButtonClickedイベントを伝搬させる
-     *
-     * @param filepath 押されたボタンの識別用にfilepathをpublic変数に保存しておく
-     * @return true Not propagation (not called)
-     * @return false Propagation
-     */
-    bool onQuizSetButtonClicked(Glib::ustring filepath);
+    void onQuizSetButtonClicked(Glib::ustring filepath);
 };
 
 #endif

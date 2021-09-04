@@ -7,7 +7,7 @@ package "Window" {
         - quiz_box: QuizBox
 
         + AppWindow()
-        - onHomeBoxClicked(GdkEventButton*): bool
+        - onQuizSetButtonClickedInHomeBox(filepath: Glib::ustring, selected_key: std::vector<OptionKey>): void
         - onQuizBoxClicked(GdkEventButton*): bool
     }
 
@@ -16,14 +16,12 @@ package "Window" {
         - quiz_set_button_vector: std::vector<Gtk::Button>
         - vertical_separator: Gtk::Separator
         - option_button_box: Gtk::Box
-        - option_button_vector: std::vector<CheckButtonWithKey>
-        - _filepath: Glib::ustring
+        - option_button_map: std::map<OptionKey, Gtk::CheckButton>
+        - signal_quiz_set_button_clicked: typeSignalQuizSetButtonClicked
 
         + HomeBox()
-        + getFilepath(): Glib::ustring
-        + getActive(key: CheckButtonWithKey::Key): bool
-        - onQuizSetButtonBoxClicked(GdkEventButton*): bool
-        - onQuizSetButtonClicked(filepath: Glib::ustring): bool
+        + signalQuizSetButtonClicked(): typeSignalQuizSetButtonClicked
+        - onQuizSetButtonClicked(filepath: Glib::ustring): void
     }
 
     class QuizBox {

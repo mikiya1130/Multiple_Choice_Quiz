@@ -12,6 +12,8 @@
 #include <gtkmm/stack.h>
 #include <giomm/file.h>
 
+#include <sigc++/sigc++.h>
+
 /**
  * @brief rootウィンドウクラス
  */
@@ -29,18 +31,12 @@ private:
     QuizBox quiz_box;     /**< このBox以下にQuiz画面を描画 */
 
     /**
-     * @brief ButtonClickedの伝搬
+     * @brief HomeBoxのQuizSetButtonのクリックシグナルを受け取る
      *
-     * (this)
-     * ^
-     * bool onQuizSetButtonBoxClicked(GdkEventButton *);
-     * ^
-     * bool onQuizSetButtonClicked(Glib::ustring filepath);
-     *
-     * @return true Not propagation
-     * @return false Propagation (not called)
+     * @param filepath 押されたボタンに対応するファイル
+     * @param selected_key チェックをつけたオプションのvector
      */
-    bool onHomeBoxClicked(GdkEventButton *);
+    void onQuizSetButtonClickedInHomeBox(Glib::ustring filepath, std::vector<OptionKey> selected_key);
 
     bool onQuizBoxClicked(GdkEventButton *);
 };

@@ -11,8 +11,8 @@ AppWindow::AppWindow()
     app_stack.add(home_box, "home");
     app_stack.add(quiz_box, "quiz");
 
-    home_box.signal_button_release_event().connect(
-        sigc::mem_fun(*this, &AppWindow::onHomeBoxClicked));
+    home_box.signalQuizSetButtonClicked().connect(
+        sigc::mem_fun(*this, &AppWindow::onQuizSetButtonClickedInHomeBox));
     quiz_box.signal_button_release_event().connect(
         sigc::mem_fun(*this, &AppWindow::onQuizBoxClicked));
 
@@ -21,9 +21,8 @@ AppWindow::AppWindow()
     show_all_children();
 }
 
-bool AppWindow::onHomeBoxClicked(GdkEventButton *)
+void AppWindow::onQuizSetButtonClickedInHomeBox(Glib::ustring filepath, std::vector<OptionKey> selected_key)
 {
-    Glib::ustring filepath = home_box.getFilepath();
     Glib::RefPtr<Gio::File> file = Gio::File::create_for_path(filepath);
 
     char *contents = nullptr;
@@ -36,20 +35,20 @@ bool AppWindow::onHomeBoxClicked(GdkEventButton *)
     catch (Glib::Error &)
     {
         g_free(contents);
-        return true;
     }
 
     // TODO remove
     std::cout << "filepath: " << filepath << std::endl;
     std::cout << "contents: " << contents << std::endl;
     std::cout << "length  : " << length << std::endl;
-    std::cout << "question: " << home_box.getActive(CheckButtonWithKey::RandomQuestion) << std::endl;
-    std::cout << "choice  : " << home_box.getActive(CheckButtonWithKey::RandomChoice) << std::endl;
+    for (OptionKey key : selected_key)
+    {
+        std::cout << int(key) << std::endl;
+    }
 
     app_stack.set_visible_child("quiz");
 
     g_free(contents);
-    return true;
 }
 
 bool AppWindow::onQuizBoxClicked(GdkEventButton *)
