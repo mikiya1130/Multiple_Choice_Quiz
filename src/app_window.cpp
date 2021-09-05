@@ -13,8 +13,8 @@ AppWindow::AppWindow()
 
     home_box.signalQuizSetButtonClicked().connect(
         sigc::mem_fun(*this, &AppWindow::onQuizSetButtonClickedInHomeBox));
-    quiz_box.signal_button_release_event().connect(
-        sigc::mem_fun(*this, &AppWindow::onQuizBoxClicked));
+    quiz_box.signalHomeButtonClicked().connect(
+        sigc::mem_fun(*this, &AppWindow::onHomeButtonClickedInQuizBox));
 
     app_stack.set_visible_child("home");
 
@@ -51,9 +51,7 @@ void AppWindow::onQuizSetButtonClickedInHomeBox(Glib::ustring filepath, std::vec
     g_free(contents);
 }
 
-bool AppWindow::onQuizBoxClicked(GdkEventButton *)
+void AppWindow::onHomeButtonClickedInQuizBox()
 {
     app_stack.set_visible_child("home");
-
-    return true;
 }

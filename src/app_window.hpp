@@ -38,7 +38,7 @@ private:
      */
     void onQuizSetButtonClickedInHomeBox(Glib::ustring filepath, std::vector<OptionKey> selected_key);
 
-    bool onQuizBoxClicked(GdkEventButton *);
+    void onHomeButtonClickedInQuizBox();
 };
 
 #endif

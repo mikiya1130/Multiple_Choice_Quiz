@@ -1,4 +1,5 @@
 #include "quiz_box.hpp"
+#include <iostream> // TODO remove
 
 QuizBox::QuizBox() : header_box(Gtk::ORIENTATION_HORIZONTAL),
                      right_side_box(Gtk::ORIENTATION_VERTICAL),
@@ -31,6 +32,8 @@ QuizBox::QuizBox() : header_box(Gtk::ORIENTATION_HORIZONTAL),
 
     qa_notebook.append_page(question_box, "問題");
     qa_notebook.append_page(explanation_box, "解説");
+    qa_notebook.signal_switch_page().connect(
+        sigc::mem_fun(*this, &QuizBox::onQaNotebookSwitchPage));
 
     right_side_box.pack_start(controll_box, Gtk::PACK_SHRINK);
     right_side_box.pack_start(vertical_right_side_box_separator, Gtk::PACK_SHRINK);
@@ -46,21 +49,52 @@ QuizBox::QuizBox() : header_box(Gtk::ORIENTATION_HORIZONTAL),
     controll_box.set_spacing(QuizBox::PADDING);
     controll_box.set_halign(Gtk::Align::ALIGN_CENTER);
 
+    previous_button.signal_clicked().connect(sigc::mem_fun(*this, &QuizBox::onPreviousButtonClicked));
+    home_button.signal_clicked().connect(sigc::mem_fun(*this, &QuizBox::onHomeButtonClicked));
+    next_button.signal_clicked().connect(sigc::mem_fun(*this, &QuizBox::onNextButtonClicked));
+
     vertical_right_side_box_separator.set_margin_top(QuizBox::PADDING);
     vertical_right_side_box_separator.set_margin_bottom(QuizBox::PADDING);
 
     choice_button_box.pack_start(choice_label, Gtk::PACK_SHRINK);
-    choice_button_vector.emplace_back(Gtk::Button("A1"));
-    choice_button_box.pack_start(choice_button_vector.back(), Gtk::PACK_EXPAND_WIDGET, QuizBox::PADDING);
-    choice_button_vector.emplace_back(Gtk::Button("A2"));
-    choice_button_box.pack_start(choice_button_vector.back(), Gtk::PACK_EXPAND_WIDGET, QuizBox::PADDING);
-    choice_button_vector.emplace_back(Gtk::Button("A3"));
-    choice_button_box.pack_start(choice_button_vector.back(), Gtk::PACK_EXPAND_WIDGET, QuizBox::PADDING);
-    choice_button_vector.emplace_back(Gtk::Button("A4"));
-    choice_button_box.pack_start(choice_button_vector.back(), Gtk::PACK_EXPAND_WIDGET, QuizBox::PADDING);
+
+    std::array<Glib::ustring, 4> choice_text{"A1", "A2", "A3", "A4"};
+    for (int i = 0; i < choice_text.size(); i++)
+    {
+        choice_button_vector.emplace_back(Gtk::Button(choice_text[i]));
+        choice_button_box.pack_start(choice_button_vector.back(), Gtk::PACK_EXPAND_WIDGET, QuizBox::PADDING);
+        choice_button_vector.back().signal_clicked().connect(
+            [this, i]
+            { onChoiceButtonClicked(i); });
+    }
 }
 
-bool QuizBox::onHomeButtonClicked()
+QuizBox::typeSignalHomeButtonClicked QuizBox::signalHomeButtonClicked()
 {
-    return false;
+    return signal_home_button_clicked;
+}
+
+void QuizBox::onQaNotebookSwitchPage(Gtk::Widget *page, guint page_num)
+{
+    std::cout << "page: " << page_num << std::endl; // TODO remove
+}
+
+void QuizBox::onPreviousButtonClicked()
+{
+    std::cout << "previous button clicked" << std::endl; // TODO remove
+}
+
+void QuizBox::onHomeButtonClicked()
+{
+    signal_home_button_clicked.emit();
+}
+
+void QuizBox::onNextButtonClicked()
+{
+    std::cout << "next button clicked" << std::endl; // TODO remove
+}
+
+void QuizBox::onChoiceButtonClicked(int number)
+{
+    std::cout << "choiced number: " << number << std::endl; // TODO remove
 }

@@ -23,6 +23,18 @@ public:
      */
     QuizBox();
 
+    /**
+     * @brief HomeButtonのクリックシグナルを扱う
+     */
+    typedef sigc::signal<void> typeSignalHomeButtonClicked;
+
+    /**
+     * @brief signal accessor
+     *
+     * @return typeSignalHomeButtonClicked
+     */
+    typeSignalHomeButtonClicked signalHomeButtonClicked();
+
 private:
     static const int PADDING = 15;
     Gtk::Box header_box;
@@ -42,8 +54,37 @@ private:
     Gtk::Label choice_label;
     Gtk::Box choice_button_box;
     std::vector<Gtk::Button> choice_button_vector;
+    typeSignalHomeButtonClicked signal_home_button_clicked;
 
-    bool onHomeButtonClicked();
+    /**
+     * @brief qa_notebookのquestion_boxとexplanation_boxを切り替える
+     *
+     * @param page // TODO write
+     * @param page_num // TODO write
+     */
+    void onQaNotebookSwitchPage(Gtk::Widget *page, guint page_num);
+
+    /**
+     * @brief 前の問題に切り替える
+     */
+    void onPreviousButtonClicked();
+
+    /**
+     * @brief HomeButtonのクリックシグナルを送る
+     */
+    void onHomeButtonClicked();
+
+    /**
+     * @brief 次の問題に切り替える
+     */
+    void onNextButtonClicked();
+
+    /**
+     * @brief 選択肢の選択
+     *
+     * @param number 選択肢の番号
+     */
+    void onChoiceButtonClicked(int number);
 };
 
 #endif

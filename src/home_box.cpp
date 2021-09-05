@@ -1,5 +1,4 @@
 #include "home_box.hpp"
-#include "option_key.hpp"
 
 HomeBox::HomeBox() : quiz_set_button_box(Gtk::ORIENTATION_VERTICAL),
                      option_button_box(Gtk::ORIENTATION_VERTICAL)
