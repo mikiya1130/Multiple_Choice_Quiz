@@ -50,12 +50,6 @@ package "Window" {
         - onChoiceButtonClicked(number: int): void
     }
 
-    class CheckButtonWithKey<Key: class, Args: class...> {
-        - _key: Key
-        + CheckButtonWithKey(key: Key, ..args: Args)
-        + getKey(): Key
-    }
-
     AppWindow o-- HomeBox
     AppWindow o-- QuizBox
 }
