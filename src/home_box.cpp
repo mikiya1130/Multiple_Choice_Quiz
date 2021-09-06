@@ -3,9 +3,15 @@
 HomeBox::HomeBox() : quiz_set_button_box(Gtk::ORIENTATION_VERTICAL),
                      option_button_box(Gtk::ORIENTATION_VERTICAL)
 {
-    pack_start(quiz_set_button_box, Gtk::PACK_EXPAND_WIDGET, HomeBox::PADDING * 2);
+    pack_start(quiz_set_button_scrolled_window, Gtk::PACK_EXPAND_WIDGET);
     pack_start(vertical_separator, Gtk::PACK_SHRINK);
     pack_start(option_button_box, Gtk::PACK_SHRINK, HomeBox::PADDING * 2);
+
+    quiz_set_button_scrolled_window.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
+    quiz_set_button_scrolled_window.add(quiz_set_button_box);
+
+    quiz_set_button_box.set_margin_left(HomeBox::PADDING);
+    quiz_set_button_box.set_margin_right(HomeBox::PADDING);
 
     for (fs::directory_entry file : fs::recursive_directory_iterator(
              HomeBox::PATH, fs::directory_options::skip_permission_denied))

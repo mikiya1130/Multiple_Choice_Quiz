@@ -7,6 +7,7 @@
 
 #include "option_key.hpp"
 
+#include <gtkmm/scrolledwindow.h>
 #include <gtkmm/box.h>
 #include <gtkmm/separator.h>
 #include <gtkmm/button.h>
@@ -44,6 +45,7 @@ private:
     static const int PADDING = 15;                                 /**< ButtonやCheckBox同士の間隔 */
     static inline const std::string PATH = "./data";               /**< クイズデータを読み込むディレクトリ */
     static inline const std::string EXT = ".json";                 /**< クイズデータの保存形式 */
+    Gtk::ScrolledWindow quiz_set_button_scrolled_window;           /**< クイズセットのリストのスクロール用 */
     Gtk::Box quiz_set_button_box;                                  /**< クイズセットのボタンを子に持つBox */
     std::vector<Gtk::Button> quiz_set_button_vector;               /**< クイズセットのボタンのvector */
     Gtk::Separator vertical_separator;                             /**< クイズセットとオプションの領域を左右に分けるセパレーター */
