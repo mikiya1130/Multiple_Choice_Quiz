@@ -38,6 +38,9 @@ private:
      */
     void onQuizSetButtonClickedInHomeBox(Glib::ustring filepath, std::vector<OptionKey> selected_key);
 
+    /**
+     * @brief QuizBoxのHomeButtonのクリックシグナルを受け取る
+     */
     void onHomeButtonClickedInQuizBox();
 };
 
