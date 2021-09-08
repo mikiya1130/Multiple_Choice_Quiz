@@ -16,3 +16,9 @@ $ make exec SRCDIR=<srcdir>  # default:src
 ```
 
 参考：https://soratobi96.hatenablog.com/entry/20191024/1571849722
+
+## Library
+
+- [gtkmm](https://www.gtkmm.org/)
+- [JSON for Modern C++](https://json.nlohmann.me/)
+- [Doxygen](https://www.doxygen.nl/index.html)
