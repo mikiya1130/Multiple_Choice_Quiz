@@ -5,23 +5,14 @@
 #ifndef QUIZ_BOX_HPP
 #define QUIZ_BOX_HPP
 
-#include "option_key.hpp"
 #include "quiz_set.hpp"
-#include "quiz_data.hpp"
 
-#include <gtkmm/box.h>
-#include <gtkmm/button.h>
-#include <gtkmm/label.h>
 #include <gtkmm/separator.h>
 #include <gtkmm/paned.h>
 #include <gtkmm/notebook.h>
 #include <gtkmm/scrolledwindow.h>
-#include <gdkmm/event.h>
-#include <giomm/file.h>
 #include <webkit2/webkit2.h>
 
-#include <fstream>
-#include <random>
 #include <filesystem>
 
 namespace fs = std::filesystem;

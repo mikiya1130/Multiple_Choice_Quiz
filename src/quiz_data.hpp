@@ -5,12 +5,7 @@
 #ifndef QUIZ_DATA_HPP
 #define QUIZ_DATA_HPP
 
-#include "../library/nlohmann/json.hpp"
-
-#include <glibmm/ustring.h>
-#include <glibmm.h>
-
-#include <vector>
+#include <glibmm/convert.h>
 
 struct Choice
 {

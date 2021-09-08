@@ -10,7 +10,6 @@
 #include "../library/nlohmann/json.hpp"
 
 #include <gtkmm/messagedialog.h>
-#include <glibmm/ustring.h>
 
 #include <fstream>
 #include <random>

@@ -8,11 +8,8 @@
 #include "home_box.hpp"
 #include "quiz_box.hpp"
 
-#include <gtkmm/window.h>
 #include <gtkmm/stack.h>
 #include <gtkmm/cssprovider.h>
-
-#include <sigc++/sigc++.h>
 
 /**
  * @brief rootウィンドウクラス

@@ -10,10 +10,8 @@
 #include <gtkmm/scrolledwindow.h>
 #include <gtkmm/box.h>
 #include <gtkmm/separator.h>
-#include <gtkmm/button.h>
 #include <gtkmm/checkbutton.h>
 
-#include <sigc++/sigc++.h>
 #include <filesystem>
 
 namespace fs = std::filesystem;
