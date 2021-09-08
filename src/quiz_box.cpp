@@ -58,6 +58,8 @@ QuizBox::QuizBox() : header_box(Gtk::ORIENTATION_HORIZONTAL),
     vertical_right_side_box_separator.set_margin_bottom(QuizBox::PADDING);
 
     choice_button_scrolled_window.add(choice_button_box);
+
+    add_events(Gdk::KEY_RELEASE_MASK);
 }
 
 QuizBox::typeSignalHomeButtonClicked QuizBox::signalHomeButtonClicked()
@@ -139,6 +141,8 @@ void QuizBox::checkFirstOrLast()
     {
         next_button.set_sensitive(true);
     }
+
+    horizontal_paned.grab_focus();
 }
 
 void QuizBox::loadChoice(const std::vector<Choice> &choice)
@@ -195,4 +199,26 @@ void QuizBox::onChoiceButtonClicked(const unsigned int &number)
     addChoiceButtonColorAndHide(quiz_set.getQuizData().choice, number);
     explanation_widget->show();
     qe_notebook.set_current_page(qe_notebook.page_num(*explanation_widget));
+}
+
+bool QuizBox::on_key_release_event(GdkEventKey *event)
+{
+    if (choice_button_box.is_sensitive())
+    {
+        if (GDK_KEY_1 <= event->keyval && event->keyval <= GDK_KEY_9 && event->keyval < GDK_KEY_1 + choice_button_vector.size())
+        {
+            onChoiceButtonClicked(event->keyval - GDK_KEY_1);
+        }
+    }
+
+    if (event->keyval == GDK_KEY_h)
+    {
+        onPreviousButtonClicked();
+    }
+    if (event->keyval == GDK_KEY_l)
+    {
+        onNextButtonClicked();
+    }
+
+    return true;
 }

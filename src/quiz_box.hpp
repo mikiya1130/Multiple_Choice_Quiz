@@ -16,6 +16,7 @@
 #include <gtkmm/paned.h>
 #include <gtkmm/notebook.h>
 #include <gtkmm/scrolledwindow.h>
+#include <gdkmm/event.h>
 #include <giomm/file.h>
 #include <webkit2/webkit2.h>
 
@@ -148,6 +149,17 @@ private:
      * @param number 選択肢の番号
      */
     void onChoiceButtonClicked(const unsigned int &number);
+
+    /**
+     * @brief ボタン押下イベントを取得
+     *
+     * ボタンを離したタイミングで発生
+     *
+     * @param event
+     * @return true
+     * @return false
+     */
+    bool on_key_release_event(GdkEventKey *event) override;
 };
 
 #endif

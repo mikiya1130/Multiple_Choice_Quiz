@@ -61,6 +61,7 @@ class QuizBox {
     - onHomeButtonClicked(): void
     - onNextButtonClicked(): void
     - onChoiceButtonClicked(number: unsigned int&): void
+    - on_key_release_event(event GdkEventKey*): bool
 }
 
 class QuizSet {
