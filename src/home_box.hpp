@@ -60,7 +60,7 @@ private:
      *
      * @param filepath
      */
-    void onQuizSetButtonClicked(Glib::ustring filepath);
+    void onQuizSetButtonClicked(const Glib::ustring &filepath);
 };
 
 #endif

@@ -36,7 +36,7 @@ private:
      * @param filepath 押されたボタンに対応するファイル
      * @param selected_key チェックをつけたオプションのvector
      */
-    void onQuizSetButtonClickedInHomeBox(Glib::ustring filepath, std::vector<OptionKey> selected_key);
+    void onQuizSetButtonClickedInHomeBox(const Glib::ustring &filepath, const std::vector<OptionKey> &selected_key);
 
     /**
      * @brief QuizBoxのHomeButtonのクリックシグナルを受け取る

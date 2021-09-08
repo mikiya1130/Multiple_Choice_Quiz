@@ -54,7 +54,7 @@ public:
      * @param filepath ファイルパス
      * @param selected_key Home画面でチェックをつけたオプションのvector
      */
-    void loadQuizSet(Glib::ustring filepath, std::vector<OptionKey> selected_key);
+    void loadQuizSet(const Glib::ustring &filepath, const std::vector<OptionKey> &selected_key);
 
 private:
     static const int PADDING = 15; /**< ButtonやCheckBox同士の間隔 */
@@ -64,7 +64,7 @@ private:
     Gtk::Label statistics_label;                       /**< 統計情報 */
     Gtk::Separator vertical_separator;                 /**< ヘッダーとメイン領域のセパレーター */
     Gtk::Paned horizontal_paned;                       /**< 問題領域と選択肢領域のセパレーター */
-    Gtk::Notebook qa_notebook;                         /**< 問題/解説の切り替え用 */
+    Gtk::Notebook qe_notebook;                         /**< 問題/解説の切り替え用 */
     WebKitWebView *question_web_view;                  /**< 問題文表示用webview */
     Gtk::Widget *question_widget;                      /**< 問題文表示用ウィジェット */
     WebKitWebView *explanation_web_view;               /**< 解説文表示用webview */
@@ -88,7 +88,7 @@ private:
      *
      * @param quiz_data クイズデータ
      */
-    void loadQuizData(QuizData quiz_data);
+    void loadQuizData(const QuizData &quiz_data);
 
     /**
      * @brief Set the Header info
@@ -102,7 +102,7 @@ private:
      * @param dir jsonファイルを含むディレクトリへのパス
      * @param html HTMLデータ(文字列またはファイル)
      */
-    void loadHtml(WebKitWebView *web_view, Glib::ustring dir, Glib::ustring html);
+    void loadHtml(WebKitWebView *web_view, const Glib::ustring &dir, const Glib::ustring &html);
 
     /**
      * @brief 前後の問題が存在するか確認する
@@ -116,7 +116,7 @@ private:
      *
      * @param choice 選択肢のvector
      */
-    void loadChoice(std::vector<Choice> choice);
+    void loadChoice(const std::vector<Choice> &choice);
 
     /**
      * @brief 解答済みにする
@@ -125,7 +125,7 @@ private:
      *
      * @param answer ユーザーの解答
      */
-    void addChoiceButtonColorAndHide(std::vector<Choice> choice, unsigned int answer);
+    void addChoiceButtonColorAndHide(const std::vector<Choice> &choice, const unsigned int &answer);
 
     /**
      * @brief 前の問題に切り替える
@@ -147,7 +147,7 @@ private:
      *
      * @param number 選択肢の番号
      */
-    void onChoiceButtonClicked(int number);
+    void onChoiceButtonClicked(const unsigned int &number);
 };
 
 #endif

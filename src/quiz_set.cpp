@@ -2,11 +2,11 @@
 
 QuizSet::QuizSet() {}
 
-QuizSet::QuizSet(Glib::ustring filepath) : filepath(filepath),
-                                           quiz_set_length(0),
-                                           current_num(0),
-                                           correct_sum(0),
-                                           question_sum(0)
+QuizSet::QuizSet(const Glib::ustring &filepath) : filepath(filepath),
+                                                  quiz_set_length(0),
+                                                  current_num(0),
+                                                  correct_sum(0),
+                                                  question_sum(0)
 {
     std::ifstream i(filepath);
     nlohmann::json j_quiz_set;
@@ -37,7 +37,7 @@ QuizSet::QuizSet(Glib::ustring filepath) : filepath(filepath),
     }
 }
 
-void QuizSet::shuffleQuizSet(std::vector<OptionKey> selected_key)
+void QuizSet::shuffleQuizSet(const std::vector<OptionKey> &selected_key)
 {
     if (!selected_key.empty())
     {
@@ -52,7 +52,7 @@ void QuizSet::shuffleQuizSet(std::vector<OptionKey> selected_key)
                 std::shuffle(quiz_data_vector.begin(), quiz_data_vector.end(), engine);
                 break;
             case OptionKey::RandomChoice:
-                for (auto &quiz_data : quiz_data_vector)
+                for (QuizData &quiz_data : quiz_data_vector)
                 {
                     std::shuffle(quiz_data.choice.begin(), quiz_data.choice.end(), engine);
                 }
@@ -115,7 +115,7 @@ bool QuizSet::isLast()
     return current_num == quiz_set_length - 1;
 }
 
-void QuizSet::answer(unsigned int number)
+void QuizSet::answer(const unsigned int &number)
 {
     quiz_data_vector[current_num].answer = number;
     question_sum++;
@@ -138,7 +138,7 @@ QuizData QuizSet::parseJson(nlohmann::json &j_quiz_data)
         quiz_data.answer = -1;
         quiz_data.explanation = Glib::locale_to_utf8(j_quiz_data["explanation"]);
 
-        for (nlohmann::json &j_choice : j_quiz_data["choice"])
+        for (const nlohmann::json &j_choice : j_quiz_data["choice"])
         {
             if (j_choice.is_string())
             {

@@ -6,7 +6,7 @@ class AppWindow {
     - quiz_box: QuizBox
 
     + AppWindow()
-    - onQuizSetButtonClickedInHomeBox(filepath: Glib::ustring, selected_key: std::vector<OptionKey>): void
+    - onQuizSetButtonClickedInHomeBox(filepath: Glib::ustring&, selected_key: std::vector<OptionKey>&): void
     - onHomeButtonClickedInQuizBox(): void
 }
 
@@ -21,7 +21,7 @@ class HomeBox {
 
     + HomeBox()
     + signalQuizSetButtonClicked(): typeSignalQuizSetButtonClicked
-    - onQuizSetButtonClicked(filepath: Glib::ustring): void
+    - onQuizSetButtonClicked(filepath: Glib::ustring&): void
 }
 
 class QuizBox {
@@ -30,7 +30,7 @@ class QuizBox {
     - statistics_label: Gtk::Label
     - vertical_separator: Gtk::Separator
     - horizontal_paned: Gtk::Paned
-    - qa_notebook: Gtk::Notebook
+    - qe_notebook: Gtk::Notebook
     - question_web_view: WebKitWebView
     - question_widget Gtk::Widget
     - explanation_web_view: WebKitWebView
@@ -50,17 +50,17 @@ class QuizBox {
 
     + QuizBox()
     + signalHomeButtonClicked(): typeSignalHomeButtonClicked
-    + loadQuizSet(filepath: Glib::ustring, selected_key: std::vector<OptionKey>): void
-    - loadQuizData(quiz_data: QuizData): void
+    + loadQuizSet(filepath: Glib::ustring&, selected_key: std::vector<OptionKey>&): void
+    - loadQuizData(quiz_data: QuizData&): void
     - setHeader(): void
-    - loadHtml(web_view: WebKitWebView*, dir: Glib::ustring, html: Glib::ustring): void
+    - loadHtml(web_view: WebKitWebView*, dir: Glib::ustring&, html: Glib::ustring&): void
     - checkFirstOrLast(): void
-    - loadChoice(choice: std::vector<Choice>): void
-    - addChoiceButtonColorAndHide(choice: std::vector<Choice>, answer: unsigned int): void
+    - loadChoice(choice: std::vector<Choice>&): void
+    - addChoiceButtonColorAndHide(choice: std::vector<Choice>&, answer: unsigned int&): void
     - onPreviousButtonClicked(): void
     - onHomeButtonClicked(): void
     - onNextButtonClicked(): void
-    - onChoiceButtonClicked(number: int): void
+    - onChoiceButtonClicked(number: unsigned int&): void
 }
 
 class QuizSet {
@@ -72,8 +72,8 @@ class QuizSet {
     - question_sum: unsigned int
 
     + QuizSet()
-    + QuizSet(filepath: Glib::ustring)
-    + shuffleQuizSet(selected_key: std::vector<OptionKey>): void
+    + QuizSet(filepath: Glib::ustring&)
+    + shuffleQuizSet(selected_key: std::vector<OptionKey>&): void
     + getQuizData(): QuizData
     + getPreviousQuizData(): QuizData
     + getNextQuizData(): QuizData
@@ -81,7 +81,7 @@ class QuizSet {
     + getStatistics(_quiz_num: unsigned int&, _quiz_sum: unsigned int&, _correct_sum: unsigned int&, _question_sum: unsigned int&): void
     + isFirst(): bool
     + isLast(): bool
-    + answer(number: unsigned int): void
+    + answer(number: unsigned int&): void
     - parseJson(j_quiz_data: nlohmann::json): QuizData
 }
 

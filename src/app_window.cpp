@@ -27,7 +27,7 @@ AppWindow::AppWindow()
     show_all_children();
 }
 
-void AppWindow::onQuizSetButtonClickedInHomeBox(Glib::ustring filepath, std::vector<OptionKey> selected_key)
+void AppWindow::onQuizSetButtonClickedInHomeBox(const Glib::ustring &filepath, const std::vector<OptionKey> &selected_key)
 {
     app_stack.set_visible_child("quiz");
     try

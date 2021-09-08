@@ -22,7 +22,7 @@ QuizBox::QuizBox() : header_box(Gtk::ORIENTATION_HORIZONTAL),
     question_number_label.set_halign(Gtk::Align::ALIGN_START);
     statistics_label.set_halign(Gtk::Align::ALIGN_END);
 
-    horizontal_paned.pack1(qa_notebook);
+    horizontal_paned.pack1(qe_notebook);
     horizontal_paned.pack2(right_side_box, true, false);
     horizontal_paned.set_position(9999);
     horizontal_paned.set_wide_handle(true);
@@ -32,8 +32,8 @@ QuizBox::QuizBox() : header_box(Gtk::ORIENTATION_HORIZONTAL),
     explanation_web_view = WEBKIT_WEB_VIEW(webkit_web_view_new());
     explanation_widget = Glib::wrap(GTK_WIDGET(explanation_web_view));
 
-    qa_notebook.append_page(*question_widget, "問題");
-    qa_notebook.append_page(*explanation_widget, "解説");
+    qe_notebook.append_page(*question_widget, "問題");
+    qe_notebook.append_page(*explanation_widget, "解説");
 
     right_side_box.pack_start(controll_box, Gtk::PACK_SHRINK);
     right_side_box.pack_start(vertical_right_side_box_separator, Gtk::PACK_SHRINK);
@@ -65,7 +65,7 @@ QuizBox::typeSignalHomeButtonClicked QuizBox::signalHomeButtonClicked()
     return signal_home_button_clicked;
 }
 
-void QuizBox::loadQuizSet(Glib::ustring filepath, std::vector<OptionKey> selected_key)
+void QuizBox::loadQuizSet(const Glib::ustring &filepath, const std::vector<OptionKey> &selected_key)
 {
     quiz_set = QuizSet(filepath);
     quiz_set.shuffleQuizSet(selected_key);
@@ -73,7 +73,7 @@ void QuizBox::loadQuizSet(Glib::ustring filepath, std::vector<OptionKey> selecte
     loadQuizData(quiz_data);
 }
 
-void QuizBox::loadQuizData(QuizData quiz_data)
+void QuizBox::loadQuizData(const QuizData &quiz_data)
 {
     Glib::ustring jsonpath = fs::path(quiz_set.getFilepath()).remove_filename().string();
     setHeader();
@@ -107,7 +107,7 @@ void QuizBox::setHeader()
     statistics_label.set_label("正解数/出題数：" + s_correct_sum + "問/" + s_question_sum + "問 (正解率：" + s_percentage + "%)");
 }
 
-void QuizBox::loadHtml(WebKitWebView *web_view, Glib::ustring dir, Glib::ustring html)
+void QuizBox::loadHtml(WebKitWebView *web_view, const Glib::ustring &dir, const Glib::ustring &html)
 {
     if (
         fs::is_regular_file(fs::path(dir + html)) && (fs::path(html).extension() == ".html" || fs::path(html).extension() == ".htm"))
@@ -141,7 +141,7 @@ void QuizBox::checkFirstOrLast()
     }
 }
 
-void QuizBox::loadChoice(std::vector<Choice> choice)
+void QuizBox::loadChoice(const std::vector<Choice> &choice)
 {
     choice_button_vector.clear();
     for (unsigned int i = 0; i < choice.size(); i++)
@@ -156,7 +156,7 @@ void QuizBox::loadChoice(std::vector<Choice> choice)
     show_all_children();
 }
 
-void QuizBox::addChoiceButtonColorAndHide(std::vector<Choice> choice, unsigned int answer)
+void QuizBox::addChoiceButtonColorAndHide(const std::vector<Choice> &choice, const unsigned int &answer)
 {
     for (unsigned int i = 0; i < choice.size(); i++)
     {
@@ -188,11 +188,11 @@ void QuizBox::onNextButtonClicked()
     loadQuizData(quiz_data);
 }
 
-void QuizBox::onChoiceButtonClicked(int number)
+void QuizBox::onChoiceButtonClicked(const unsigned int &number)
 {
     quiz_set.answer(number);
     setHeader();
     addChoiceButtonColorAndHide(quiz_set.getQuizData().choice, number);
     explanation_widget->show();
-    qa_notebook.set_current_page(qa_notebook.page_num(*explanation_widget));
+    qe_notebook.set_current_page(qe_notebook.page_num(*explanation_widget));
 }

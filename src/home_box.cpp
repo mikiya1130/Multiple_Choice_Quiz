@@ -13,7 +13,7 @@ HomeBox::HomeBox() : quiz_set_button_box(Gtk::ORIENTATION_VERTICAL),
     quiz_set_button_box.set_margin_left(HomeBox::PADDING);
     quiz_set_button_box.set_margin_right(HomeBox::PADDING);
 
-    for (fs::directory_entry file : fs::recursive_directory_iterator(
+    for (const fs::directory_entry &file : fs::recursive_directory_iterator(
              HomeBox::PATH, fs::directory_options::skip_permission_denied))
     {
         if (file.is_regular_file() && file.path().extension() == HomeBox::EXT)
@@ -40,7 +40,7 @@ HomeBox::typeSignalQuizSetButtonClicked HomeBox::signalQuizSetButtonClicked()
     return signal_quiz_set_button_clicked;
 }
 
-void HomeBox::onQuizSetButtonClicked(Glib::ustring filepath)
+void HomeBox::onQuizSetButtonClicked(const Glib::ustring &filepath)
 {
     std::vector<OptionKey> selected_key;
 

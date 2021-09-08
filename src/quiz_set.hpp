@@ -31,14 +31,14 @@ public:
      *
      * @param filepath ファイルパス
      */
-    QuizSet(Glib::ustring filepath);
+    QuizSet(const Glib::ustring &filepath);
 
     /**
      * @brief クイズセットをシャッフルする
      *
      * @param selected_key Home画面でチェックをつけたオプションのvector
      */
-    void shuffleQuizSet(std::vector<OptionKey> selected_key);
+    void shuffleQuizSet(const std::vector<OptionKey> &selected_key);
 
     /**
      * @brief Get the Quiz Data object
@@ -101,7 +101,7 @@ public:
      *
      * @param number 選択番号
      */
-    void answer(unsigned int number);
+    void answer(const unsigned int &number);
 
 private:
     Glib::ustring filepath;                 /**< クイズデータファイルへのパス */
