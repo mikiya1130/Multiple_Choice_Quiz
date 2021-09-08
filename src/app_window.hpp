@@ -10,7 +10,7 @@
 
 #include <gtkmm/window.h>
 #include <gtkmm/stack.h>
-#include <giomm/file.h>
+#include <gtkmm/cssprovider.h>
 
 #include <sigc++/sigc++.h>
 

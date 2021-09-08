@@ -1,86 +1,107 @@
 @startuml class_diagram
 
-package "Window" {
-    class AppWindow {
-        - app_stack: Gtk::Stack
-        - home_box: HomeBox
-        - quiz_box: QuizBox
+class AppWindow {
+    - app_stack: Gtk::Stack
+    - home_box: HomeBox
+    - quiz_box: QuizBox
 
-        + AppWindow()
-        - onQuizSetButtonClickedInHomeBox(filepath: Glib::ustring, selected_key: std::vector<OptionKey>): void
-        - onHomeButtonClickedInQuizBox(): void
-    }
-
-    class HomeBox {
-        - quiz_set_button_box: Gtk::Box
-        - quiz_set_button_vector: std::vector<Gtk::Button>
-        - vertical_separator: Gtk::Separator
-        - option_button_box: Gtk::Box
-        - option_button_map: std::map<OptionKey, Gtk::CheckButton>
-        - signal_quiz_set_button_clicked: typeSignalQuizSetButtonClicked
-
-        + HomeBox()
-        + signalQuizSetButtonClicked(): typeSignalQuizSetButtonClicked
-        - onQuizSetButtonClicked(filepath: Glib::ustring): void
-    }
-
-    class QuizBox {
-        - header_box: Gtk::Box
-        - question_number_label: Gtk::Label
-        - statistics_label: Gtk::Label
-        - vertical_separator: Gtk::Separator
-        - horizontal_paned: Gtk::Paned
-        - qa_notebook: Gtk::Notebook
-        - question_box: Gtk::Box
-        - explanation_box: Gtk::Box
-        - right_side_box: Gtk::Box
-        - controll_box: Gtk::Box
-        - previous_button: Gtk::Button
-        - home_button: Gtk::Button
-        - next_button: Gtk::Button
-        - vertical_right_side_box_separator: Gtk::Separator
-        - choice_label: Gtk::Label
-        - choice_button_box: Gtk::Box
-        - choice_button_vector: std::vector<Gtk::Button>
-        - signal_home_button_clicked: typeSignalHomeButtonClicked
-
-        + QuizBox()
-        + signalHomeButtonClicked(): typeSignalHomeButtonClicked
-        - onQaNotebookSwitchPage(page: Gtk::Widget*, page_num: guint): void
-        - onPreviousButtonClicked(): void
-        - onHomeButtonClicked(): void
-        - onNextButtonClicked(): void
-        - onChoiceButtonClicked(number: int): void
-    }
-
-    AppWindow o-- HomeBox
-    AppWindow o-- QuizBox
+    + AppWindow()
+    - onQuizSetButtonClickedInHomeBox(filepath: Glib::ustring, selected_key: std::vector<OptionKey>): void
+    - onHomeButtonClickedInQuizBox(): void
 }
 
-package "Quiz" {
-    class QuizSet {
-        - filepath: Glib::ustring
-        - name: Glib::ustring
-        - quiz_list: Quiz[]
-        - correct_sum: int
-        - question_sum: int
+class HomeBox {
+    - quiz_set_button_scrolled_window Gtk::ScrolledWindow
+    - quiz_set_button_box: Gtk::Box
+    - quiz_set_button_vector: std::vector<Gtk::Button>
+    - vertical_separator: Gtk::Separator
+    - option_button_box: Gtk::Box
+    - option_button_map: std::map<OptionKey, Gtk::CheckButton>
+    - signal_quiz_set_button_clicked: typeSignalQuizSetButtonClicked
 
-        + QuizSet(filepath: Glib::ustring)
-        + getName(): Glib::ustring
-        + loadQuiz(random_question: bool, random_choice: bool): void
-        + getQuiz(number: int): Quiz
-        + answerQuiz(number: int, answer: int): void
-    }
-
-    class Quiz {
-        - question: Glib::ustring
-        - choices: Glib::ustring[]
-        - answer: int
-        - correct_answer: int
-        - explanation: Glib::ustring
-    }
-
-    QuizSet "1" *-- "*" Quiz
+    + HomeBox()
+    + signalQuizSetButtonClicked(): typeSignalQuizSetButtonClicked
+    - onQuizSetButtonClicked(filepath: Glib::ustring): void
 }
+
+class QuizBox {
+    - header_box: Gtk::Box
+    - question_number_label: Gtk::Label
+    - statistics_label: Gtk::Label
+    - vertical_separator: Gtk::Separator
+    - horizontal_paned: Gtk::Paned
+    - qa_notebook: Gtk::Notebook
+    - question_web_view: WebKitWebView
+    - question_widget Gtk::Widget
+    - explanation_web_view: WebKitWebView
+    - explanation_widget Gtk::Widget
+    - right_side_box: Gtk::Box
+    - controll_box: Gtk::Box
+    - previous_button: Gtk::Button
+    - home_button: Gtk::Button
+    - next_button: Gtk::Button
+    - vertical_right_side_box_separator: Gtk::Separator
+    - choice_label: Gtk::Label
+    - choice_button_scrolled_window: Gtk::ScrolledWindow
+    - choice_button_box: Gtk::Box
+    - choice_button_vector: std::vector<Gtk::Button>
+    - signal_home_button_clicked: typeSignalHomeButtonClicked
+    - quiz_set: QuizSet
+
+    + QuizBox()
+    + signalHomeButtonClicked(): typeSignalHomeButtonClicked
+    + loadQuizSet(filepath: Glib::ustring, selected_key: std::vector<OptionKey>): void
+    - loadQuizData(quiz_data: QuizData): void
+    - setHeader(): void
+    - loadHtml(web_view: WebKitWebView*, dir: Glib::ustring, html: Glib::ustring): void
+    - checkFirstOrLast(): void
+    - loadChoice(choice: std::vector<Choice>): void
+    - addChoiceButtonColorAndHide(choice: std::vector<Choice>, answer: unsigned int): void
+    - onPreviousButtonClicked(): void
+    - onHomeButtonClicked(): void
+    - onNextButtonClicked(): void
+    - onChoiceButtonClicked(number: int): void
+}
+
+class QuizSet {
+    - filepath: Glib::ustring
+    - quiz_data_vector: std::vector<QuizData>
+    - quiz_set_length: unsigned int
+    - current_num: unsigned int
+    - correct_sum: unsigned int
+    - question_sum: unsigned int
+
+    + QuizSet()
+    + QuizSet(filepath: Glib::ustring)
+    + shuffleQuizSet(selected_key: std::vector<OptionKey>): void
+    + getQuizData(): QuizData
+    + getPreviousQuizData(): QuizData
+    + getNextQuizData(): QuizData
+    + getFilepath(): Glib::ustring
+    + getStatistics(_quiz_num: unsigned int&, _quiz_sum: unsigned int&, _correct_sum: unsigned int&, _question_sum: unsigned int&): void
+    + isFirst(): bool
+    + isLast(): bool
+    + answer(number: unsigned int): void
+    - parseJson(j_quiz_data: nlohmann::json): QuizData
+}
+
+class QuizData {
+    + question: Glib::ustring
+    + choice: std::vector<Choice>
+    + answer: unsigned int
+    + explanation: Glib::ustring
+    + has_fault: bool
+}
+
+class Choice {
+    + label: Glib::ustring
+    + is_correct: bool
+}
+
+AppWindow o-- HomeBox
+AppWindow o-- QuizBox
+QuizBox o-- QuizSet
+QuizSet o-- QuizData
+QuizData o-- Choice
 
 @enduml

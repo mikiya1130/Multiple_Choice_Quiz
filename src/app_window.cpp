@@ -1,5 +1,4 @@
 #include "app_window.hpp"
-#include <iostream> // TODO remove
 
 AppWindow::AppWindow()
 {
@@ -16,6 +15,13 @@ AppWindow::AppWindow()
     quiz_box.signalHomeButtonClicked().connect(
         sigc::mem_fun(*this, &AppWindow::onHomeButtonClickedInQuizBox));
 
+    Glib::RefPtr<Gtk::CssProvider> correct_css_provider = Gtk::CssProvider::create();
+    correct_css_provider->load_from_data(
+        ".answer {color: red; border-color: red;} \
+        .correct {color: green; border-color: green;}");
+    get_style_context()->add_provider_for_screen(
+        get_screen(), correct_css_provider, GTK_STYLE_PROVIDER_PRIORITY_USER);
+
     app_stack.set_visible_child("home");
 
     show_all_children();
@@ -23,32 +29,20 @@ AppWindow::AppWindow()
 
 void AppWindow::onQuizSetButtonClickedInHomeBox(Glib::ustring filepath, std::vector<OptionKey> selected_key)
 {
-    Glib::RefPtr<Gio::File> file = Gio::File::create_for_path(filepath);
-
-    char *contents = nullptr;
-    gsize length = 0;
-
+    app_stack.set_visible_child("quiz");
     try
     {
-        file->load_contents(contents, length);
+        quiz_box.loadQuizSet(filepath, selected_key);
     }
-    catch (Glib::Error &)
+    catch (std::exception &e)
     {
-        g_free(contents);
+        Gtk::MessageDialog dialog(
+            "クイズデータが1件も存在しません", false, Gtk::MESSAGE_WARNING, Gtk::BUTTONS_OK, false);
+        dialog.set_secondary_text("クイズセット選択画面へ戻ります");
+        dialog.run();
+
+        app_stack.set_visible_child("home");
     }
-
-    // TODO remove
-    std::cout << "filepath: " << filepath << std::endl;
-    std::cout << "contents: " << contents << std::endl;
-    std::cout << "length  : " << length << std::endl;
-    for (OptionKey key : selected_key)
-    {
-        std::cout << int(key) << std::endl;
-    }
-
-    app_stack.set_visible_child("quiz");
-
-    g_free(contents);
 }
 
 void AppWindow::onHomeButtonClickedInQuizBox()

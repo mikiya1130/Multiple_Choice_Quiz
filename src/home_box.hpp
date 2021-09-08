@@ -42,15 +42,17 @@ public:
     typeSignalQuizSetButtonClicked signalQuizSetButtonClicked();
 
 private:
-    static const int PADDING = 15;                                 /**< ButtonやCheckBox同士の間隔 */
-    static inline const std::string PATH = "./data";               /**< クイズデータを読み込むディレクトリ */
-    static inline const std::string EXT = ".json";                 /**< クイズデータの保存形式 */
-    Gtk::ScrolledWindow quiz_set_button_scrolled_window;           /**< クイズセットのリストのスクロール用 */
-    Gtk::Box quiz_set_button_box;                                  /**< クイズセットのボタンを子に持つBox */
-    std::vector<Gtk::Button> quiz_set_button_vector;               /**< クイズセットのボタンのvector */
-    Gtk::Separator vertical_separator;                             /**< クイズセットとオプションの領域を左右に分けるセパレーター */
-    Gtk::Box option_button_box;                                    /**< オプションのチェックボックスを子に持つBox */
-    std::map<OptionKey, Gtk::CheckButton> option_button_map;       /**< オプションのチェックボックスのmap */
+    static const int PADDING = 15;                   /**< ButtonやCheckBox同士の間隔 */
+    static inline const std::string PATH = "./data"; /**< クイズデータを読み込むディレクトリ */
+    static inline const std::string EXT = ".json";   /**< クイズデータの保存形式 */
+
+    Gtk::ScrolledWindow quiz_set_button_scrolled_window;     /**< クイズセットのリストのスクロール用 */
+    Gtk::Box quiz_set_button_box;                            /**< クイズセットのボタンを子に持つBox */
+    std::vector<Gtk::Button> quiz_set_button_vector;         /**< クイズセットのボタンのvector */
+    Gtk::Separator vertical_separator;                       /**< クイズセットとオプションの領域を左右に分けるセパレーター */
+    Gtk::Box option_button_box;                              /**< オプションのチェックボックスを子に持つBox */
+    std::map<OptionKey, Gtk::CheckButton> option_button_map; /**< オプションのチェックボックスのmap */
+
     typeSignalQuizSetButtonClicked signal_quiz_set_button_clicked; /**< QuizSetButtonのクリックシグナル */
 
     /**
