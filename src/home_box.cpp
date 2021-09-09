@@ -16,7 +16,7 @@ HomeBox::HomeBox() : quiz_set_button_box(Gtk::ORIENTATION_VERTICAL),
     try
     {
         for (const fs::directory_entry &file : fs::recursive_directory_iterator(
-                 Config::PATH, fs::directory_options::skip_permission_denied))
+                 fs::read_symlink("/proc/self/exe").remove_filename().string() + Config::PATH, fs::directory_options::skip_permission_denied))
         {
             if (file.is_regular_file() && file.path().extension() == Config::EXT)
             {

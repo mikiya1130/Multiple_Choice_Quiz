@@ -15,9 +15,9 @@ namespace Config
     static const int WINDOW_HEIGHT = 600;
     static const Glib::ustring TITLE = "Multiple_Choice_Quiz";
 
-    static const int PADDING = 15;            /**< ButtonやCheckBox同士の間隔 */
-    static const std::string PATH = "./data"; /**< クイズデータを読み込むディレクトリ */
-    static const std::string EXT = ".json";   /**< クイズデータの保存形式 */
+    static const int PADDING = 15;          /**< ButtonやCheckBox同士の間隔 */
+    static const std::string PATH = "data"; /**< クイズデータを読み込むディレクトリ */
+    static const std::string EXT = ".json"; /**< クイズデータの保存形式 */
 
     namespace About
     {
