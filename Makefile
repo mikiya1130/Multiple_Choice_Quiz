@@ -1,6 +1,6 @@
 SRCDIR   := src
 BUILDDIR := build
-TARGET   := $(BUILDDIR)/Multiple_Choice_Quiz
+TARGET   := $(BUILDDIR)/Multiple_Choice_Quiz.AppImage
 
 CXX      := g++
 CXXFLAGS := -Wall -Wextra `pkg-config --cflags gtkmm-3.0` `pkg-config --cflags webkit2gtk-4.0` -std=c++17
