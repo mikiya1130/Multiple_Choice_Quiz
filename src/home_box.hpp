@@ -5,6 +5,7 @@
 #ifndef HOME_BOX_HPP
 #define HOME_BOX_HPP
 
+#include "config.hpp"
 #include "option_key.hpp"
 
 #include <gtkmm/scrolledwindow.h>
@@ -41,10 +42,6 @@ public:
     typeSignalQuizSetButtonClicked signalQuizSetButtonClicked();
 
 private:
-    static const int PADDING = 15;                   /**< ButtonやCheckBox同士の間隔 */
-    static inline const std::string PATH = "./data"; /**< クイズデータを読み込むディレクトリ */
-    static inline const std::string EXT = ".json";   /**< クイズデータの保存形式 */
-
     Gtk::ScrolledWindow quiz_set_button_scrolled_window;     /**< クイズセットのリストのスクロール用 */
     Gtk::Box quiz_set_button_box;                            /**< クイズセットのボタンを子に持つBox */
     std::vector<Gtk::Button> quiz_set_button_vector;         /**< クイズセットのボタンのvector */

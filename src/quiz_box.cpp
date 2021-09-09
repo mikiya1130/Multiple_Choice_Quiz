@@ -15,10 +15,10 @@ QuizBox::QuizBox() : header_box(Gtk::ORIENTATION_HORIZONTAL),
 
     header_box.pack_start(question_number_label);
     header_box.pack_start(statistics_label);
-    header_box.set_margin_top(QuizBox::PADDING);
-    header_box.set_margin_right(QuizBox::PADDING * 2);
-    header_box.set_margin_bottom(QuizBox::PADDING);
-    header_box.set_margin_left(QuizBox::PADDING * 2);
+    header_box.set_margin_top(Config::PADDING);
+    header_box.set_margin_right(Config::PADDING * 2);
+    header_box.set_margin_bottom(Config::PADDING);
+    header_box.set_margin_left(Config::PADDING * 2);
     question_number_label.set_halign(Gtk::Align::ALIGN_START);
     statistics_label.set_halign(Gtk::Align::ALIGN_END);
 
@@ -39,23 +39,23 @@ QuizBox::QuizBox() : header_box(Gtk::ORIENTATION_HORIZONTAL),
     right_side_box.pack_start(vertical_right_side_box_separator, Gtk::PACK_SHRINK);
     right_side_box.pack_start(choice_label, Gtk::PACK_SHRINK);
     right_side_box.pack_start(choice_button_scrolled_window);
-    right_side_box.set_margin_top(QuizBox::PADDING);
-    right_side_box.set_margin_right(QuizBox::PADDING);
-    right_side_box.set_margin_bottom(QuizBox::PADDING);
-    right_side_box.set_margin_left(QuizBox::PADDING);
+    right_side_box.set_margin_top(Config::PADDING);
+    right_side_box.set_margin_right(Config::PADDING);
+    right_side_box.set_margin_bottom(Config::PADDING);
+    right_side_box.set_margin_left(Config::PADDING);
 
     controll_box.pack_start(previous_button, Gtk::PACK_SHRINK);
     controll_box.pack_start(home_button, Gtk::PACK_SHRINK);
     controll_box.pack_start(next_button, Gtk::PACK_SHRINK);
-    controll_box.set_spacing(QuizBox::PADDING);
+    controll_box.set_spacing(Config::PADDING);
     controll_box.set_halign(Gtk::Align::ALIGN_CENTER);
 
     previous_button.signal_clicked().connect(sigc::mem_fun(*this, &QuizBox::onPreviousButtonClicked));
     home_button.signal_clicked().connect(sigc::mem_fun(*this, &QuizBox::onHomeButtonClicked));
     next_button.signal_clicked().connect(sigc::mem_fun(*this, &QuizBox::onNextButtonClicked));
 
-    vertical_right_side_box_separator.set_margin_top(QuizBox::PADDING);
-    vertical_right_side_box_separator.set_margin_bottom(QuizBox::PADDING);
+    vertical_right_side_box_separator.set_margin_top(Config::PADDING);
+    vertical_right_side_box_separator.set_margin_bottom(Config::PADDING);
 
     choice_button_scrolled_window.add(choice_button_box);
 
@@ -151,7 +151,7 @@ void QuizBox::loadChoice(const std::vector<Choice> &choice)
     for (unsigned int i = 0; i < choice.size(); i++)
     {
         choice_button_vector.emplace_back(Gtk::Button(choice[i].label));
-        choice_button_box.pack_start(choice_button_vector.back(), Gtk::PACK_EXPAND_WIDGET, QuizBox::PADDING);
+        choice_button_box.pack_start(choice_button_vector.back(), Gtk::PACK_EXPAND_WIDGET, Config::PADDING);
         choice_button_vector.back().signal_clicked().connect(
             [this, i]
             { onChoiceButtonClicked(i); });

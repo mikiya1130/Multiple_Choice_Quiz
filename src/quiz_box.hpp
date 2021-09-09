@@ -5,6 +5,7 @@
 #ifndef QUIZ_BOX_HPP
 #define QUIZ_BOX_HPP
 
+#include "config.hpp"
 #include "quiz_set.hpp"
 
 #include <gtkmm/separator.h>
@@ -49,8 +50,6 @@ public:
     void loadQuizSet(const Glib::ustring &filepath, const std::vector<OptionKey> &selected_key);
 
 private:
-    static const int PADDING = 15; /**< ButtonやCheckBox同士の間隔 */
-
     Gtk::Box header_box;                               /**< 情報を表示するヘッダーのBox  */
     Gtk::Label question_number_label;                  /**< 現在の問題番号 */
     Gtk::Label statistics_label;                       /**< 統計情報 */

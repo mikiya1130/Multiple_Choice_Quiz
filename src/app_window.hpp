@@ -5,6 +5,7 @@
 #ifndef APP_WINDOW_HPP
 #define APP_WINDOW_HPP
 
+#include "config.hpp"
 #include "home_box.hpp"
 #include "quiz_box.hpp"
 

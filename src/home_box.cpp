@@ -5,24 +5,24 @@ HomeBox::HomeBox() : quiz_set_button_box(Gtk::ORIENTATION_VERTICAL),
 {
     pack_start(quiz_set_button_scrolled_window, Gtk::PACK_EXPAND_WIDGET);
     pack_start(vertical_separator, Gtk::PACK_SHRINK);
-    pack_start(option_button_box, Gtk::PACK_SHRINK, HomeBox::PADDING * 2);
+    pack_start(option_button_box, Gtk::PACK_SHRINK, Config::PADDING * 2);
 
     quiz_set_button_scrolled_window.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
     quiz_set_button_scrolled_window.add(quiz_set_button_box);
 
-    quiz_set_button_box.set_margin_left(HomeBox::PADDING);
-    quiz_set_button_box.set_margin_right(HomeBox::PADDING);
+    quiz_set_button_box.set_margin_left(Config::PADDING);
+    quiz_set_button_box.set_margin_right(Config::PADDING);
 
     try
     {
         for (const fs::directory_entry &file : fs::recursive_directory_iterator(
-                 HomeBox::PATH, fs::directory_options::skip_permission_denied))
+                 Config::PATH, fs::directory_options::skip_permission_denied))
         {
-            if (file.is_regular_file() && file.path().extension() == HomeBox::EXT)
+            if (file.is_regular_file() && file.path().extension() == Config::EXT)
             {
                 quiz_set_button_vector.emplace_back(file.path().stem().string());
                 quiz_set_button_box.pack_start(
-                    quiz_set_button_vector.back(), Gtk::PACK_EXPAND_WIDGET, HomeBox::PADDING);
+                    quiz_set_button_vector.back(), Gtk::PACK_EXPAND_WIDGET, Config::PADDING);
                 quiz_set_button_vector.back().signal_clicked().connect(
                     [this, file]
                     { onQuizSetButtonClicked(file.path().string()); });
@@ -31,7 +31,7 @@ HomeBox::HomeBox() : quiz_set_button_box(Gtk::ORIENTATION_VERTICAL),
 
         if (quiz_set_button_vector.size() == 0)
         {
-            throw std::runtime_error("runtime error: json file not found in " + HomeBox::PATH);
+            throw std::runtime_error("runtime error: json file not found in " + Config::PATH);
         }
     }
     catch (std::runtime_error &)
@@ -50,7 +50,7 @@ HomeBox::HomeBox() : quiz_set_button_box(Gtk::ORIENTATION_VERTICAL),
     option_button_map[OptionKey::RandomChoice] = Gtk::CheckButton("選択肢をランダムに並び替える");
     for (auto &[key, option_button] : option_button_map)
     {
-        option_button_box.pack_start(option_button, Gtk::PACK_SHRINK, HomeBox::PADDING);
+        option_button_box.pack_start(option_button, Gtk::PACK_SHRINK, Config::PADDING);
     }
 }
 

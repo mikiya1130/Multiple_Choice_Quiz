@@ -5,6 +5,7 @@
 #ifndef QUIZ_SET_HPP
 #define QUIZ_SET_HPP
 
+#include "config.hpp"
 #include "option_key.hpp"
 #include "quiz_data.hpp"
 #include "../library/nlohmann/json.hpp"
