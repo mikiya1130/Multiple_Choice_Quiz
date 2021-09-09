@@ -2,7 +2,6 @@
 
 AppWindow::AppWindow()
 {
-    set_title("Multiple_Choice_Quiz");
     set_default_size(800, 600);
 
     add(app_stack);
@@ -21,6 +20,14 @@ AppWindow::AppWindow()
         .correct {color: green; border-color: green;}");
     get_style_context()->add_provider_for_screen(
         get_screen(), correct_css_provider, GTK_STYLE_PROVIDER_PRIORITY_USER);
+
+    header_bar.set_title("Multiple_Choice_Quiz");
+    header_bar.set_show_close_button(true);
+    header_bar.pack_start(about_button);
+    set_titlebar(header_bar);
+
+    about_button.set_label("About");
+    about_button.signal_clicked().connect(sigc::mem_fun(*this, &AppWindow::onAboutButtonClicked));
 
     app_stack.set_visible_child("home");
 
@@ -48,4 +55,19 @@ void AppWindow::onQuizSetButtonClickedInHomeBox(const Glib::ustring &filepath, c
 void AppWindow::onHomeButtonClickedInQuizBox()
 {
     app_stack.set_visible_child("home");
+}
+
+void AppWindow::onAboutButtonClicked()
+{
+    about_dialog.set_transient_for(*this);
+    about_dialog.set_program_name("Multiple_Choice_Quiz");
+    about_dialog.set_version("1.0.0");
+    about_dialog.set_website("https://github.com/mikiya1130/Multiple_Choice_Quiz");
+    about_dialog.set_website_label("Multiple_Choice_Quiz");
+    about_dialog.set_copyright("© 2021 Morisaki Mikiya");
+    std::vector<Glib::ustring> authors_vector;
+    authors_vector.push_back("Morisaki Mikiya");
+    about_dialog.set_authors(authors_vector);
+    about_dialog.set_license("MIT Lisence");
+    about_dialog.show();
 }

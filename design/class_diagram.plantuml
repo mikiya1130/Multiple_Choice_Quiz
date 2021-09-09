@@ -4,10 +4,14 @@ class AppWindow {
     - app_stack: Gtk::Stack
     - home_box: HomeBox
     - quiz_box: QuizBox
+    - header_bar: Gtk::HeaderBar
+    - about_button: Gtk::Button
+    - about_dialog: Gtk::AboutDialog
 
     + AppWindow()
     - onQuizSetButtonClickedInHomeBox(filepath: Glib::ustring&, selected_key: std::vector<OptionKey>&): void
     - onHomeButtonClickedInQuizBox(): void
+    - onAboutButtonClicked(): void
 }
 
 class HomeBox {

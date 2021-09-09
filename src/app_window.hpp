@@ -10,6 +10,7 @@
 
 #include <gtkmm/stack.h>
 #include <gtkmm/cssprovider.h>
+#include <gtkmm/aboutdialog.h>
 
 /**
  * @brief rootウィンドウクラス
@@ -23,9 +24,12 @@ public:
     AppWindow();
 
 private:
-    Gtk::Stack app_stack; /**< Home画面とQuiz画面の切り替え用Stack */
-    HomeBox home_box;     /**< このBox以下にHome画面を描画 */
-    QuizBox quiz_box;     /**< このBox以下にQuiz画面を描画 */
+    Gtk::Stack app_stack;          /**< Home画面とQuiz画面の切り替え用Stack */
+    HomeBox home_box;              /**< このBox以下にHome画面を描画 */
+    QuizBox quiz_box;              /**< このBox以下にQuiz画面を描画 */
+    Gtk::HeaderBar header_bar;     /**< ヘッダーバー */
+    Gtk::Button about_button;      /**< aboutボタン */
+    Gtk::AboutDialog about_dialog; /**< aboutダイアログ */
 
     /**
      * @brief HomeBoxのQuizSetButtonのクリックシグナルを受け取る
@@ -39,6 +43,11 @@ private:
      * @brief QuizBoxのHomeButtonのクリックシグナルを受け取る
      */
     void onHomeButtonClickedInQuizBox();
+
+    /**
+     * @brief AboutButtonのクリックシグナルを受け取る
+     */
+    void onAboutButtonClicked();
 };
 
 #endif
