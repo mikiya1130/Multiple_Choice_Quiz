@@ -11,6 +11,7 @@
 #include <gtkmm/box.h>
 #include <gtkmm/separator.h>
 #include <gtkmm/checkbutton.h>
+#include <gtkmm/messagedialog.h>
 
 #include <filesystem>
 

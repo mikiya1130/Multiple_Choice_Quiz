@@ -13,18 +13,37 @@ HomeBox::HomeBox() : quiz_set_button_box(Gtk::ORIENTATION_VERTICAL),
     quiz_set_button_box.set_margin_left(HomeBox::PADDING);
     quiz_set_button_box.set_margin_right(HomeBox::PADDING);
 
-    for (const fs::directory_entry &file : fs::recursive_directory_iterator(
-             HomeBox::PATH, fs::directory_options::skip_permission_denied))
+    try
     {
-        if (file.is_regular_file() && file.path().extension() == HomeBox::EXT)
+        for (const fs::directory_entry &file : fs::recursive_directory_iterator(
+                 HomeBox::PATH, fs::directory_options::skip_permission_denied))
         {
-            quiz_set_button_vector.emplace_back(file.path().stem().string());
-            quiz_set_button_box.pack_start(
-                quiz_set_button_vector.back(), Gtk::PACK_EXPAND_WIDGET, HomeBox::PADDING);
-            quiz_set_button_vector.back().signal_clicked().connect(
-                [this, file]
-                { onQuizSetButtonClicked(file.path().string()); });
+            if (file.is_regular_file() && file.path().extension() == HomeBox::EXT)
+            {
+                quiz_set_button_vector.emplace_back(file.path().stem().string());
+                quiz_set_button_box.pack_start(
+                    quiz_set_button_vector.back(), Gtk::PACK_EXPAND_WIDGET, HomeBox::PADDING);
+                quiz_set_button_vector.back().signal_clicked().connect(
+                    [this, file]
+                    { onQuizSetButtonClicked(file.path().string()); });
+            }
         }
+
+        if (quiz_set_button_vector.size() == 0)
+        {
+            throw std::runtime_error("runtime error: json file not found in " + HomeBox::PATH);
+        }
+    }
+    catch (std::runtime_error &)
+    {
+        Gtk::MessageDialog dialog(
+            "クイズセットが見つかりませんでした", false, Gtk::MESSAGE_WARNING, Gtk::BUTTONS_OK, false);
+        dialog.set_secondary_text(
+            "dataディレクトリを用意し、\njson形式のクイズデータを作成してください\n\n"
+            "アプリケーションを終了します");
+        dialog.run();
+
+        throw std::runtime_error("runtime error: quiz set not found");
     }
 
     option_button_map[OptionKey::RandomQuestion] = Gtk::CheckButton("ランダムに出題する");
