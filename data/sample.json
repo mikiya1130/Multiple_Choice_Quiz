@@ -1,46 +1,32 @@
 [
     {
-        "question": "q0",
+        "question": "このクイズアプリが利用できるOSはどれ？",
         "choice": [
-            "a0",
-            "a1",
-            "a2",
-            "a3"
+            "Linux",
+            "Windows",
+            "Mac"
         ],
         "correct": 0,
-        "explanation": "e0"
+        "explanation": "GNOMEデスクトップ環境のLinuxに対応しています"
     },
     {
-        "question": "q1",
+        "question": "クイズデータの作成方法は？",
         "choice": [
-            "a0",
-            "a1",
-            "a2",
-            "a3"
+            "XMLファイルに記述する",
+            "JSONファイルに記述する",
+            "YAMLファイルに記述する",
+            "CSVファイルに記述する"
         ],
         "correct": 1,
-        "explanation": "e1"
+        "explanation": "JSONファイルに記述し、実行ファイルと同階層に作成したdataディレクトリ以下に配置してください"
     },
     {
-        "question": "q2",
+        "question": "問題文や解説文を<u>HTML</u>で記述するには？",
         "choice": [
-            "a0",
-            "a1",
-            "a2",
-            "a3"
+            "HTMLを直接記述する、\nまたはHTMLファイルへのパスを記述する",
+            "HTMLには対応していない"
         ],
-        "correct": 2,
-        "explanation": "e2"
-    },
-    {
-        "question": "q3",
-        "choice": [
-            "a0",
-            "a1",
-            "a2",
-            "a3"
-        ],
-        "correct": 3,
-        "explanation": "e3"
+        "correct": 0,
+        "explanation": "sample.html"
     }
 ]
