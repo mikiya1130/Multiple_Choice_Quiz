@@ -75,7 +75,7 @@ $ ./Multiple_Choice_Quiz.AppImage  # 実行
 ```
 - rootは配列
 - 配列の中の1つのオブジェクトが1つの問題に対応
-- オブジェクトの要素は`question(str)`, `choice(array\<str\>)`, `correct(int)`, `explanation(str)`, `question(str)`からなる
+- オブジェクトの要素は`question(str)`, `choice(array<str>)`, `correct(int)`, `explanation(str)`からなる
 - `question`と`explanation`には直接HTMLを記述したり、jsonファイルからの相対パスを記述してHTMLファイルを読み込ませたりすることが可能
 - "choice"配列の要素数(=選択肢の数)は可変
 - JSONファイル名(拡張子を除く)がクイズセット名としてHOME画面に表示される
