@@ -25,6 +25,15 @@ $(BUILDDIR)/%.o: %.cpp
 
 clean:
 	rm -rf $(BUILDDIR)
+	mkdir $(BUILDDIR)
+	ln -s ../data/ ./$(BUILDDIR)/data
 
 exec: $(TARGET)
 	@$(TARGET)
+
+out:
+	mkdir $(BUILDDIR)/Multiple_Choice_Quiz
+	cp $(BUILDDIR)/Multiple_Choice_Quiz.AppImage $(BUILDDIR)/Multiple_Choice_Quiz/
+	cp -r data $(BUILDDIR)/Multiple_Choice_Quiz/
+	tar cvf $(BUILDDIR)/Multiple_Choice_Quiz.tar.gz -C $(BUILDDIR) Multiple_Choice_Quiz
+	rm -rf $(BUILDDIR)/Multiple_Choice_Quiz
