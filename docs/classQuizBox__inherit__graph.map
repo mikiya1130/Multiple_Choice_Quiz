@@ -1,0 +1,4 @@
+<map id="QuizBox" name="QuizBox">
+<area shape="rect" id="node1" title="quiz画面のルートにあたるGtk::Boxの派生クラス" alt="" coords="5,131,247,545"/>
+<area shape="rect" id="node2" title=" " alt="" coords="83,5,169,83"/>
+</map>

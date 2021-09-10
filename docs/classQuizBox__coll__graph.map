@@ -1,0 +1,5 @@
+<map id="QuizBox" name="QuizBox">
+<area shape="rect" id="node1" title="quiz画面のルートにあたるGtk::Boxの派生クラス" alt="" coords="8,380,249,795"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,123,92,200"/>
+<area shape="rect" id="node3" href="$classQuizSet.html" title="クイズセットと統計情報の管理" alt="" coords="117,5,301,317"/>
+</map>
