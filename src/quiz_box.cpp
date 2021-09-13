@@ -112,7 +112,7 @@ void QuizBox::setHeader()
 void QuizBox::loadHtml(WebKitWebView *web_view, const Glib::ustring &dir, const Glib::ustring &html)
 {
     if (
-        fs::is_regular_file(fs::path(dir + html)) && (fs::path(html).extension() == ".html" || fs::path(html).extension() == ".htm"))
+        html.bytes() < 250 && fs::is_regular_file(fs::path(dir + html)) && (fs::path(html).extension() == ".html" || fs::path(html).extension() == ".htm"))
     {
         webkit_web_view_load_uri(web_view, ("file:///" + fs::absolute((dir + html).c_str()).string()).c_str());
     }
