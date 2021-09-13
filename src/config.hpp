@@ -22,7 +22,7 @@ namespace Config
     namespace About
     {
         static const Glib::ustring PROGRAM_NAME = "Multiple_Choice_Quiz";
-        static const Glib::ustring VERSION = "1.0.0";
+        static const Glib::ustring VERSION = "1.0.1";
         static const Glib::ustring WEBSITE = "https://github.com/mikiya1130/Multiple_Choice_Quiz";
         static const Glib::ustring WEBSITE_LABEL = "Multiple_Choice_Quiz";
         static const Glib::ustring COPYRIGHT = "© 2021 Morisaki Mikiya";
